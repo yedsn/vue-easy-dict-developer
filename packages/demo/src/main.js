@@ -4,7 +4,7 @@ import App from './App.vue'
 import VueEasyDict from 'vue-easy-dict'
 Vue.use(VueEasyDict)
 
-VueEasyDict.initDicts()
+VueEasyDict.init()
 
 Vue.config.productionTip = false
 
