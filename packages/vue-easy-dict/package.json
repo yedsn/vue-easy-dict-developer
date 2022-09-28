@@ -2,13 +2,25 @@
   "name": "vue-easy-dict",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "dist/vue-easy-dict.common.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vue-cli-service build --target lib --name vue-easy-dict ./index.js"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^2.6.14"
+  },
   "devDependencies": {
-    "eslint": "^6.7.2"
+    "vue-easy-dict": "workspace:^1.0.0",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-template-compiler": "^2.6.14"
   }
 }

@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pingan8787/vue-easy-dict.git"
+    "url": "git+https://gitee.com/hongxiaojian/vue-easy-dict"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pingan8787/vue-easy-dict/issues"
+    "url": "https://gitee.com/hongxiaojian/vue-easy-dict/issues"
   },
-  "homepage": "https://github.com/pingan8787/vue-easy-dict#readme",
+  "homepage": "https://gitee.com/hongxiaojian/vue-easy-dict#readme",
   "dependencies": {
   }
 }
