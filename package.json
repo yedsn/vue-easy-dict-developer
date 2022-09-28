@@ -4,7 +4,8 @@
   "description": "vue-easy-dict",
   "main": "index.js",
   "scripts": {
-    "serve:demo": "pnpm --filter \"@vue-easy-dict/demo\" serve"
+    "serve:demo": "pnpm --filter \"@vue-easy-dict/demo\" serve",
+    "build": "pnpm --filter \"vue-easy-dict\" build"
   },
   "repository": {
     "type": "git",

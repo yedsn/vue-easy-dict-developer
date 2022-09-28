@@ -1,8 +1,8 @@
 {
   "name": "vue-easy-dict",
-  "version": "1.0.0",
+  "version": "0.2.1",
   "description": "",
-  "main": "dist/vue-easy-dict.common.js",
+  "main": "./dist/vue-easy-dict.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-easy-dict ./index.js"
   },
@@ -13,7 +13,6 @@
     "vue": "^2.6.14"
   },
   "devDependencies": {
-    "vue-easy-dict": "workspace:^1.0.0",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
