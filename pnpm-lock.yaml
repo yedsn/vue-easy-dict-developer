@@ -37,6 +37,7 @@ importers:
       '@babel/core': ^7.12.16
       '@babel/eslint-parser': ^7.12.16
       '@babel/plugin-transform-runtime': ^7.19.1
+      '@babel/runtime': ^7.19.0
       '@vue/cli-plugin-babel': ~5.0.0
       '@vue/cli-plugin-eslint': ~5.0.0
       '@vue/cli-service': ~5.0.0
@@ -54,6 +55,7 @@ importers:
       '@babel/core': 7.17.12
       '@babel/eslint-parser': 7.19.1_2bh7kehukxfohdstug5sazpsbu
       '@babel/plugin-transform-runtime': 7.19.1_@babel+core@7.17.12
+      '@babel/runtime': 7.19.0
       '@vue/cli-plugin-babel': 5.0.8_7fvgejhbmpmc6jigukacqcw26q
       '@vue/cli-plugin-eslint': 5.0.8_yvnkslq6l73c7sesu7e5hzum2a
       '@vue/cli-service': 5.0.8_h3cy5ohwa2423ppaadd3bauxjq
