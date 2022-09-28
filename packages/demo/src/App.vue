@@ -7,14 +7,12 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import { getUA } from 'vue-easy-dict'
 export default {
   name: 'App',
   components: {
     HelloWorld
   },
   mounted() {
-    console.log("gggg", getUA())
   }
 }
 </script>

@@ -2,7 +2,8 @@
   "name": "vue-easy-dict",
   "version": "0.2.1",
   "description": "",
-  "main": "./dist/vue-easy-dict.common.js",
+  "main": "index.js",
+  "unpkg": "dist/vue-easy-dict.common.js",
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-easy-dict ./index.js"
   },
