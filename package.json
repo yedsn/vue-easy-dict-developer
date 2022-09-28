@@ -1,0 +1,21 @@
+{
+  "name": "vue-easy-dict",
+  "version": "1.0.0",
+  "description": "vue-easy-dict",
+  "main": "index.js",
+  "scripts": {
+    "serve:demo": "pnpm --filter \"@vue-easy-dict/demo\" serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pingan8787/vue-easy-dict.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pingan8787/vue-easy-dict/issues"
+  },
+  "homepage": "https://github.com/pingan8787/vue-easy-dict#readme",
+  "dependencies": {
+  }
+}
