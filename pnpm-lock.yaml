@@ -16,7 +16,7 @@ importers:
       eslint: ^7.32.0
       eslint-plugin-vue: ^8.0.3
       vue: ^2.6.14
-      vue-easy-dict: workspace:^0.2.1
+      vue-easy-dict: workspace:^0.2.2
       vue-template-compiler: ^2.6.14
     dependencies:
       core-js: 3.22.5
@@ -36,6 +36,7 @@ importers:
     specifiers:
       '@babel/core': ^7.12.16
       '@babel/eslint-parser': ^7.12.16
+      '@babel/plugin-transform-runtime': ^7.19.1
       '@vue/cli-plugin-babel': ~5.0.0
       '@vue/cli-plugin-eslint': ~5.0.0
       '@vue/cli-service': ~5.0.0
@@ -52,6 +53,7 @@ importers:
     devDependencies:
       '@babel/core': 7.17.12
       '@babel/eslint-parser': 7.19.1_2bh7kehukxfohdstug5sazpsbu
+      '@babel/plugin-transform-runtime': 7.19.1_@babel+core@7.17.12
       '@vue/cli-plugin-babel': 5.0.8_7fvgejhbmpmc6jigukacqcw26q
       '@vue/cli-plugin-eslint': 5.0.8_yvnkslq6l73c7sesu7e5hzum2a
       '@vue/cli-service': 5.0.8_h3cy5ohwa2423ppaadd3bauxjq
@@ -2410,10 +2412,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /ajv-formats/2.1.1_ajv@8.11.0:
+  /ajv-formats/2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -4085,19 +4085,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dev: false
-
-  /follow-redirects/1.15.2_debug@4.3.3:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.3
-    dev: true
 
   /form-data/4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
@@ -4421,7 +4408,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2_debug@4.3.3
+      follow-redirects: 1.15.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -6053,7 +6040,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.9
       ajv: 8.11.0
-      ajv-formats: 2.1.1_ajv@8.11.0
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0_ajv@8.11.0
     dev: true
 

@@ -23,7 +23,7 @@ VueEasyDict.init({
         {
             dictKey: 'company',
             dictApi: {
-                url: 'http://127.0.0.1:4523/m1/1105256-0-default/company',
+                url: '/company',
                 method: 'get',
             },
             labelKey: 'name',
