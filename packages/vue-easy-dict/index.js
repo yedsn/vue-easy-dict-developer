@@ -41,7 +41,7 @@ export default {
 
             // 循环字典配置列表
             for (let dict of dicts) {
-                const { 
+                let { 
                     dictKey, 
                     labelKey: itemLabelKey, 
                     valueKey: itemValueKey, 

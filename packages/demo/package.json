@@ -10,7 +10,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
-    "vue-easy-dict": "workspace:^0.2.1"
+    "vue-easy-dict": "workspace:^0.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
