@@ -16,6 +16,9 @@ export default {
     console.log(this.$dict.getDict('status'))
     console.log(this.$dict.getDictLabel('status', 1))
     console.log(this.$dict.getDictItem('status', 1))
+    console.log(this.$dict.getDict('company'))
+    console.log(this.$dict.getDictLabel('company', 59))
+    console.log(this.$dict.getDictItem('company', 59))
   }
 }
 </script>

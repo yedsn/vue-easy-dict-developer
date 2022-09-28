@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './dict/index'
+import './dict'
 
 Vue.config.productionTip = false
 

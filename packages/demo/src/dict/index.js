@@ -19,6 +19,18 @@ VueEasyDict.init({
                 { label: '启用', value: 1, color: 'red' },
                 { label: '禁用', value: 0, color: 'green' }
             ]
+        },
+        {
+            dictKey: 'company',
+            dictApi: {
+                url: 'http://127.0.0.1:4523/m1/1105256-0-default/company',
+                method: 'get',
+            },
+            labelKey: 'name',
+            valueKey: 'id'
         }
-    ]
+    ],
+    onReady() {
+        // console.log("加载完毕", dictData)
+    }
 })

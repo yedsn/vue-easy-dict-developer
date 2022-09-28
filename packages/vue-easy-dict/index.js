@@ -1,18 +1,20 @@
 export let _Vue
 export let dictDataPool = {} 
+import request from './lib/request.js'
 export default {
     install(Vue) {
         _Vue = Vue
         Vue.prototype.$dict = this
     },
-    init(options = {}) {
+    async init(options = {}) {
         const {
             storageKey = 'dictData',
             modules = {},
             labelKey: globalLabelKey = 'label',
             valueKey: globalValueKey = 'value',
             dictApi: globalDictApi = {},
-            cache: globalCache = true
+            cache: globalCache = true,
+            onReady
         } = options
 
         // 获取缓存的字典数据
@@ -38,7 +40,7 @@ export default {
             }
 
             // 循环字典配置列表
-            dicts.forEach(dict => {
+            for (let dict of dicts) {
                 const { 
                     dictKey, 
                     labelKey: itemLabelKey, 
@@ -49,20 +51,31 @@ export default {
                 } = dict
                 
                 // 根据顺序 当前->模块->全局 顺序，获取配置
-                const { url, method = 'get', headers = {}, params = {}, data = {}, cache = true } = dictApi || moduleDictApi || globalDictApi
+                const { baseUrl, url, method, headers, params, data, cache = true } = dictApi || moduleDictApi || globalDictApi
                 const labelKey = itemLabelKey || moduleLabelKey || globalLabelKey
                 const valueKey = itemValueKey || moduleValueKey || globalValueKey
+                console.log("labelKey", labelKey)
+                console.log("valueKey", valueKey)
                 
                 // 请求字典接口数据
                 if (url) {
 
                     // TODO 接口获取数据
                     console.log("当前字典api配置", url, method, headers, params, data, cache)
+                    let res = await request({
+                        url: (baseUrl || '') + url,
+                        method: method || 'get',
+                        headers: headers || {},
+                        params: params || {},
+                        data: data || {}
+                    })
+                    console.log(typeof res)
+                    console.log("接口请求结果", res)
+                    dictData = res
                     
                 }
                 moduleDictDataPool[dictKey] = dictData.map(x => ({...x, label: x[labelKey], value: x[valueKey]}))
-                
-            })
+            }
         }
         console.log('字典数据池', dictDataPool)
         
@@ -70,6 +83,8 @@ export default {
         if(globalCache) {
             localStorage.setItem(storageKey, JSON.stringify(dictDataPool))
         }
+
+        onReady && onReady(dictDataPool)
     },
 
     /**
