@@ -54,8 +54,6 @@ export default {
                 const { baseUrl, url, method, headers, params, data, cache = true } = dictApi || moduleDictApi || globalDictApi
                 const labelKey = itemLabelKey || moduleLabelKey || globalLabelKey
                 const valueKey = itemValueKey || moduleValueKey || globalValueKey
-                console.log("labelKey", labelKey)
-                console.log("valueKey", valueKey)
                 
                 // 请求字典接口数据
                 if (url) {
