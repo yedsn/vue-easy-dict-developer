@@ -1,6 +1,5 @@
 export let _Vue
 export let dictDataPool = {}
-import merge from 'merge'
 
 export default {
     install(Vue) {
@@ -60,7 +59,7 @@ export default {
                 if (url) {
 
                     // TODO 接口获取数据
-                    console.log("当前字典api配置", url, method, headers, params, data, cache)
+                    console.log("当前字典api配置1", url, method, headers, params, data, cache)
                     // let res = await request({
                     //     url: (baseUrl || '') + url,
                     //     method: method || 'get',
@@ -73,7 +72,7 @@ export default {
                     // dictData = res
 
                 }
-                moduleDictDataPool[dictKey] = dictData.map(x => (merge.recursive(x, {label: x[labelKey], value: x[valueKey]})))
+                moduleDictDataPool[dictKey] = dictData.map(x => ({...x, label: x[labelKey], value: x[valueKey]}))
             }
         }
         console.log('字典数据池', dictDataPool)

@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-dict",
-  "version": "0.3.0",
+  "version": "0.3.4",
   "description": "data dict for Vue.js",
   "main": "src/index.js",
   "unpkg": "dist/vue-data-dict.js",
@@ -37,11 +37,11 @@
     "@babel/preset-env": "^7.10.4",
     "babel-loader": "^8.1.0",
     "eslint": "^7.5.0",
+    "terser-webpack-plugin": "^4.2.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.8"
   },
   "dependencies": {
-    "merge": "^1.2.1",
     "vue": "^2.6.11"
   }
 }
