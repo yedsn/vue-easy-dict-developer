@@ -59,7 +59,7 @@ export default {
                 if (url) {
 
                     // TODO 接口获取数据
-                    console.log("当前字典api配置1", url, method, headers, params, data, cache)
+                    console.log("当前字典api配置", url, method, headers, params, data, cache)
                     // let res = await request({
                     //     url: (baseUrl || '') + url,
                     //     method: method || 'get',
