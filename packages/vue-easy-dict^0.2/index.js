@@ -1,6 +1,8 @@
 export let _Vue
 export let dictDataPool = {} 
 import request from './lib/request.js'
+import merge from 'merge'
+
 export default {
     install(Vue) {
         _Vue = Vue
@@ -72,7 +74,7 @@ export default {
                     dictData = res
                     
                 }
-                moduleDictDataPool[dictKey] = dictData.map(x => ({...x, label: x[labelKey], value: x[valueKey]}))
+                moduleDictDataPool[dictKey] = dictData.map(x => (merge.recursive(x, {label: x[labelKey], value: x[valueKey]})))
             }
         }
         console.log('字典数据池', dictDataPool)
