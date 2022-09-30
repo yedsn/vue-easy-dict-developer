@@ -34,12 +34,16 @@ export default class Dict {
       }
       loadDictTasks.push(loadDict(this, dictMeta))
     })
-    return Promise.all(loadDictTasks)
+    this.allLoadPromise = Promise.all(loadDictTasks)
+    return this.allLoadPromise
   }
 
   /**
    * 加载字典
    * @param {String} dictKey 字典键
+   * @param {Boolean} force 是否强制刷新
+   *
+   * @returns {Promise}
    */
   loadDict(dictKey, force) {
     const dictMeta = this.dictMetas.find(e => e.dictKey === dictKey)
@@ -80,13 +84,11 @@ export default class Dict {
  * @returns {Promise}
  */
 function loadDict(dict, dictMeta, force = false) {
-  return new Promise((resolve) => {
+  if(dictMeta.loadPromise && !force) {
+    return dictMeta.loadPromise
+  }
+  let loadPromise = new Promise((resolve) => {
     let { dictKey, dictData, loadData, labelField, valueField} = dictMeta
-
-    // 不强制加载，且已经加载过，则直接返回
-    if(dict[dictKey] && !force) {
-      resolve(dict[dictKey])
-    }
 
     console.log(`start load dict: ${dictKey}`)
     // 加载数据方法
@@ -112,4 +114,6 @@ function loadDict(dict, dictMeta, force = false) {
       resolve(dict.dictDataPool[dictKey])
     }
   })
+  dictMeta.loadPromise = loadPromise
+  return loadPromise
 }

@@ -27,20 +27,15 @@ Vue.use(VueEasyDict, {
             // immediateLoad: false,
             loadData(dictMeta) {
                 console.log("开始加载", dictMeta)
-                // return new Promise((resolve) => {
-                //     setTimeout(() => {
-                //         resolve([
-                //             { name: '公司1', id: 1 },
-                //             { name: '公司2', id: 2 },
-                //             { name: '公司3', id: 3 },
-                //         ])
-                //     }, 4000)
-                // })
-                return [
-                    { name: '公司1', id: 1 },
-                    { name: '公司2', id: 2 },
-                    { name: '公司3', id: 3 },
-                ]
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve([
+                            { name: '公司1', id: 1 },
+                            { name: '公司2', id: 2 },
+                            { name: '公司3', id: 3 },
+                        ])
+                    }, 4000)
+                })
             },
             labelField: 'name',
             valueField: 'id'

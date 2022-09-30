@@ -19,6 +19,7 @@ export default class DictMeta {
     this.immediateLoad = options.immediateLoad
     this.labelField = options.labelField
     this.valueField = options.valueField
+    this.loadPromise = null
   }
 }
 
