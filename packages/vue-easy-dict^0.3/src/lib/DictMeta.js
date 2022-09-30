@@ -1,18 +1,19 @@
 import DictOptions from './DictOptions'
+import DictData from './DictData'
 import merge from 'merge'
 
 /**
  * @classdesc 字典元数据
- * @property {String} type 类型
+ * @property {String} dictKey 字典键
  * @property {Function} request 请求
- * @property {String} label 标签字段
- * @property {String} value 值字段
+ * @property {String} labelField 标签字段
+ * @property {String} valueField 值字段
  */
 export default class DictMeta {
   constructor(options) {
-    this.type = options.type
+    this.dictKey = options.dictKey
+    this.dictData = options.dictData
     this.request = options.request,
-    this.responseConverter = options.responseConverter
     this.labelField = options.labelField
     this.valueField = options.valueField
     this.lazy = options.lazy === true
@@ -25,14 +26,7 @@ export default class DictMeta {
  * @param {Object} options
  * @returns {DictMeta}
  */
-DictMeta.parse= function(options) {
-  let opts = null
-  if (typeof options === 'string') {
-    opts = DictOptions.metas[options] || {}
-    opts.type = options
-  } else if (typeof options === 'object') {
-    opts = options
-  }
-  opts = merge.recursive(true, DictOptions.metas['*'], DictOptions.metas[opts.type], opts)
+DictMeta.parse = function(options) {
+  let opts = { ...DictOptions, ...options }
   return new DictMeta(opts)
 }

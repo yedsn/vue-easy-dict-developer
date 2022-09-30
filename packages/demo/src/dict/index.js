@@ -1,9 +1,7 @@
 
 import Vue from 'vue'
 import VueEasyDict from 'vue-easy-dict'
-Vue.use(VueEasyDict)
-
-VueEasyDict.init({
+Vue.use(VueEasyDict, {
     cache: false,
     modules: {
         // user: {
@@ -22,15 +20,23 @@ VueEasyDict.init({
         },
         {
             dictKey: 'company',
-            dictApi: {
-                url: '/company',
-                method: 'get',
+            request(dictMeta) {
+                console.log("开始请求", dictMeta)
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve([
+                            { name: '公司1', id: 1 },
+                            { name: '公司2', id: 2 },
+                            { name: '公司3', id: 3 },
+                        ])
+                    }, 4000)
+                })
             },
-            labelKey: 'name',
-            valueKey: 'id'
+            labelField: 'name',
+            valueField: 'id'
         }
     ],
-    onReady() {
-        // console.log("加载完毕", dictData)
+    onReady(dict) {
+        console.log("加载完毕", dict)
     }
 })

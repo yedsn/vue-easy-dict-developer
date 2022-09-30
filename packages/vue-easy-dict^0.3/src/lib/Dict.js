@@ -1,10 +1,9 @@
-import Vue from 'vue'
+import install from './install'
 import DictMeta from './DictMeta'
 import DictData from './DictData'
-import merge from 'merge'
 
 const DEFAULT_DICT_OPTIONS = {
-  types: [],
+  dicts: [],
 }
 
 /**
@@ -14,44 +13,49 @@ const DEFAULT_DICT_OPTIONS = {
  * @property {Array.<DictMeta>} _dictMetas 字典元数据数组
  */
 export default class Dict {
+  static install = install
+
   constructor() {
-    this.owner = null
-    this.label = {}
-    this.dict = []
+    this.dictDataPool = {}
+    this.dictMetas = []
   }
 
   init(options) {
     if (options instanceof Array) {
-      options = { types: options }
+      options = { dicts: options }
     }
-    const opts = merge.recursive({}, DEFAULT_DICT_OPTIONS, options)
-    if (opts.types === undefined) {
-      throw new Error('need dict types')
-    }
-    const ps = []
-    this._dictMetas = opts.types.map(t => DictMeta.parse(t))
-    this._dictMetas.forEach(dictMeta => {
-      const type = dictMeta.type
-      Vue.set(this.label, type, {})
-      Vue.set(this.dict, type, [])
+    let dicts = options.dicts || []
+    const loadDictTasks = []
+    this.dictMetas = dicts.map(x => DictMeta.parse(x))
+    console.log('dictMetas', this.dictMetas)
+    this.dictMetas.forEach(dictMeta => {
+      const { dictKey } = dictMeta
       if (dictMeta.lazy) {
         return
       }
-      ps.push(loadDict(this, dictMeta))
+      loadDictTasks.push(loadDict(this, dictMeta))
     })
-    return Promise.all(ps)
+    return Promise.all(loadDictTasks)
   }
 
   /**
    * 重新加载字典
-   * @param {String} type 字典类型
+   * @param {String} dictKey 字典键
    */
-  reloadDict(type) {
-    const dictMeta = this._dictMetas.find(e => e.type === type)
+  reloadDict(dictKey) {
+    const dictMeta = this.dictMetas.find(e => e.dictKey === dictKey)
     if (dictMeta === undefined) {
-      return Promise.reject(`the dict meta of ${type} was not found`)
+      return Promise.reject(`the dict meta of ${dictKey} was not found`)
     }
     return loadDict(this, dictMeta)
+  }
+
+  /**
+   * 获取字典
+   * @param {String} dictKey 字典键
+   */
+  getDict(dictKey) {
+    return this.dictDataPool[dictKey]
   }
 }
 
@@ -62,25 +66,29 @@ export default class Dict {
  * @returns {Promise}
  */
 function loadDict(dict, dictMeta) {
-  let dictReq = dictMeta.request(dictMeta)
-  if (!(dictReq instanceof Promise)) {
-    dictReq = Promise.resolve(dictReq)
-  }
-  return dictReq
-    .then(response => {
-      const type = dictMeta.type
-      let dicts = dictMeta.responseConverter(response, dictMeta)
-      if (!(dicts instanceof Array)) {
-        console.error('the return of responseConverter must be Array.<DictData>')
-        dicts = []
-      } else if (dicts.filter(d => d instanceof DictData).length !== dicts.length) {
-        console.error('the type of elements in dicts must be DictData')
-        dicts = []
+  return new Promise((resolve) => {
+    let { dictKey, dictData, request, labelField, valueField} = dictMeta
+    console.log(`start load dictData: ${dictKey}`)
+    if(!dictData || dictData.length === 0) {
+      let dictReq = request(dictMeta)
+      if (!(dictReq instanceof Promise)) {
+        dictReq = Promise.resolve(dictReq)
       }
-      dict.dict[type].splice(0, Number.MAX_SAFE_INTEGER, ...dicts)
-      dicts.forEach(d => {
-        Vue.set(dict.label[type], d.value, d.label)
+      dictReq.then(response => {
+        if (!(response instanceof Array)) {
+          console.error('the request return must be Promise of Array.')
+          response = []
+        }
+        dict.dictDataPool[dictKey] = response.map(x => new DictData(x[labelField], x[valueField], x))
+        resolve(dict.dictDataPool[dictKey])
       })
-      return dicts
-    })
+    } else {
+      if (!(dictData instanceof Array)) {
+        console.error('the dictData must be Array.')
+        response = []
+      }
+      dict.dictDataPool[dictKey] = dictData.map(x => new DictData(x[labelField], x[valueField], x))
+      resolve(dict.dictDataPool[dictKey])
+    }
+  })
 }
