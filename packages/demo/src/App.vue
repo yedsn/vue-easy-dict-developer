@@ -16,9 +16,9 @@ export default {
     await this.$dict.ready
     console.log("获取到字典", this.$dict.getDictData('status'))
     console.log("1", this.$dict.getDict('status', 1))
-    console.log("1", this.$dict.getDict('status', 1).raw)
-    console.log("2", this.$dict.getDictRaw('status', 1))
-    console.log("3", this.$dict.getDictLabel('status', 1))
+    console.log("2", this.$dict.getDict('status', 1).raw)
+    console.log("3", this.$dict.getDictRaw('status', 1))
+    console.log("4", this.$dict.getDictLabel('status', 1))
     await this.$dict.loadDict('company')
     console.log("获取到字典", this.$dict.getDictData('company'))
   }
