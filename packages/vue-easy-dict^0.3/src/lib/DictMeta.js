@@ -1,6 +1,4 @@
 import DictOptions from './DictOptions'
-import DictData from './DictData'
-import merge from 'merge'
 
 /**
  * @classdesc 字典元数据

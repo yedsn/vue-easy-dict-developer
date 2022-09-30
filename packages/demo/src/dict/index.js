@@ -11,22 +11,9 @@ Vue.use(VueEasyDict, {
     },
     dicts: [
         {
-            dictKey: 'status',
-            dictData: [
-                { label: '启用', value: 1, color: 'red' },
-                { label: '禁用', value: 0, color: 'green' }
-            ],
-            // loadData() {
-            //     return [
-            //         { label: 'ok', value: 1 }
-            //     ]
-            // }
-        },
-        {
             dictKey: 'company',
             // immediateLoad: false,
-            loadData(dictMeta) {
-                console.log("开始加载", dictMeta)
+            loadData() {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve([
@@ -39,6 +26,19 @@ Vue.use(VueEasyDict, {
             },
             labelField: 'name',
             valueField: 'id'
+        },
+        {
+            dictKey: 'status',
+            // immediateLoad: false,
+            dictData: [
+                { label: '启用', value: 1, color: 'red' },
+                { label: '禁用', value: 0, color: 'green' }
+            ],
+            // loadData() {
+            //     return [
+            //         { label: 'ok', value: 1 }
+            //     ]
+            // }
         }
     ],
     onReady(dict) {

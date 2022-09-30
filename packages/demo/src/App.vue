@@ -13,15 +13,14 @@ export default {
     HelloWorld
   },
   async mounted() {
-    console.log("获取到字典", this.$dict.getDict('status'))
-    console.log("获取到字典", this.$dict.getDictLabel('status', 1))
+    await this.$dict.ready
+    console.log("获取到字典", this.$dict.getDictData('status'))
+    console.log("1", this.$dict.getDict('status', 1))
+    console.log("1", this.$dict.getDict('status', 1).raw)
+    console.log("2", this.$dict.getDictRaw('status', 1))
+    console.log("3", this.$dict.getDictLabel('status', 1))
     await this.$dict.loadDict('company')
-    console.log("获取到字典", this.$dict.getDict('company'))
-    // console.log(this.$dict.getDictLabel('status', 1))
-    // console.log(this.$dict.getDictItem('status', 1))
-    // console.log(this.$dict.getDict('company'))
-    // console.log(this.$dict.getDictLabel('company', 59))
-    // console.log(this.$dict.getDictItem('company', 59))
+    console.log("获取到字典", this.$dict.getDictData('company'))
   }
 }
 </script>

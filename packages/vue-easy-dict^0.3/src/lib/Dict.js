@@ -2,15 +2,10 @@ import install from './install'
 import DictMeta from './DictMeta'
 import DictData from './DictData'
 
-const DEFAULT_DICT_OPTIONS = {
-  dicts: [],
-}
-
 /**
  * @classdesc 字典
- * @property {Object} label 标签对象，内部属性名为字典类型名称
- * @property {Array} dict 字段数组，内部属性名为字典类型名称
- * @property {Array.<DictMeta>} _dictMetas 字典元数据数组
+ * @property {Array} dictDataPool 字典对象池
+ * @property {Array.<DictMeta>} dictMetas 字典元数据数组
  */
 export default class Dict {
   static install = install
@@ -34,8 +29,8 @@ export default class Dict {
       }
       loadDictTasks.push(loadDict(this, dictMeta))
     })
-    this.allLoadPromise = Promise.all(loadDictTasks)
-    return this.allLoadPromise
+    this.ready = Promise.all(loadDictTasks).then(() => this)
+    return this.ready
   }
 
   /**
@@ -54,14 +49,20 @@ export default class Dict {
   }
 
   /**
-   * 获取字典
+   * 获取字典数据
    * @param {String} dictKey 字典键
    */
-  getDict(dictKey) {
+  getDictData(dictKey) {
     if(!this.dictDataPool[dictKey]) {
       console.warn(`you are loading an unloaded dict "${dictKey}", please do it after load`)
     }
     return this.dictDataPool[dictKey] || []
+  }
+
+  getDict(dictKey, value) {
+    const dictData = this.getDictData(dictKey)
+    const dict = dictData.find(e => e.value === value)
+    return dict
   }
 
   /**
@@ -71,9 +72,18 @@ export default class Dict {
    * @returns
    */
   getDictLabel(dictKey, value) {
-    const dict = this.getDict(dictKey)
-    const dictData = dict.find(e => e.value === value)
-    return dictData ? dictData.label : ''
+    const dict = this.getDict(dictKey, value)
+    return dict ? dict.label : ''
+  }
+
+  /**
+   * 获取字典原始数据
+   * @param {*} dictKey
+   * @param {*} value
+   */
+  getDictRaw(dictKey, value) {
+    const dict = this.getDict(dictKey, value)
+    return dict ? dict.raw : {}
   }
 }
 
