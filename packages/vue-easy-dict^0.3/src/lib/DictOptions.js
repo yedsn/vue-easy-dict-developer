@@ -1,11 +1,15 @@
 export const options = {
   /**
-   * 字典请求，方法签名为function(dictMeta: DictMeta): Promise | Array
+   * 是否初始化时立即加载
    */
-  request: (dictMeta) => {
-    console.log(`load dict ${dictMeta.dictKey}`)
-    return Promise.resolve([])
-  },
+  immediateLoad: true,
+  /**
+   * 字典加载方法，方法签名为function(dictMeta: DictMeta): Promise | Array
+   */
+  loadData: null,
+  /**
+   * 字典数据
+   */
   dictData: [],
   /**
    * 默认标签字段

@@ -29,8 +29,7 @@ export default class Dict {
     this.dictMetas = dicts.map(x => DictMeta.parse(x))
     console.log('dictMetas', this.dictMetas)
     this.dictMetas.forEach(dictMeta => {
-      const { dictKey } = dictMeta
-      if (dictMeta.lazy) {
+      if (!dictMeta.immediateLoad) {
         return
       }
       loadDictTasks.push(loadDict(this, dictMeta))
@@ -55,7 +54,7 @@ export default class Dict {
    * @param {String} dictKey 字典键
    */
   getDict(dictKey) {
-    return this.dictDataPool[dictKey]
+    return this.dictDataPool[dictKey] || []
   }
 }
 
@@ -67,14 +66,15 @@ export default class Dict {
  */
 function loadDict(dict, dictMeta) {
   return new Promise((resolve) => {
-    let { dictKey, dictData, request, labelField, valueField} = dictMeta
-    console.log(`start load dictData: ${dictKey}`)
-    if(!dictData || dictData.length === 0) {
-      let dictReq = request(dictMeta)
-      if (!(dictReq instanceof Promise)) {
-        dictReq = Promise.resolve(dictReq)
+    let { dictKey, dictData, loadData, labelField, valueField} = dictMeta
+    console.log(`start load dict: ${dictKey}`)
+    // 加载数据方法
+    if(loadData) {
+      let loadFun = loadData(dictMeta)
+      if (!(loadFun instanceof Promise)) {
+        loadFun = Promise.resolve(loadFun)
       }
-      dictReq.then(response => {
+      loadFun.then(response => {
         if (!(response instanceof Array)) {
           console.error('the request return must be Promise of Array.')
           response = []

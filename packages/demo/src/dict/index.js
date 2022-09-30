@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import VueEasyDict from 'vue-easy-dict'
 Vue.use(VueEasyDict, {
-    cache: false,
     modules: {
         // user: {
         //   dicts: [
@@ -16,21 +15,32 @@ Vue.use(VueEasyDict, {
             dictData: [
                 { label: '启用', value: 1, color: 'red' },
                 { label: '禁用', value: 0, color: 'green' }
-            ]
+            ],
+            loadData() {
+                return [
+                    { label: 'ok', value: 1 }
+                ]
+            }
         },
         {
             dictKey: 'company',
-            request(dictMeta) {
-                console.log("开始请求", dictMeta)
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve([
-                            { name: '公司1', id: 1 },
-                            { name: '公司2', id: 2 },
-                            { name: '公司3', id: 3 },
-                        ])
-                    }, 4000)
-                })
+            immediateLoad: false,
+            loadData(dictMeta) {
+                console.log("开始加载", dictMeta)
+                // return new Promise((resolve) => {
+                //     setTimeout(() => {
+                //         resolve([
+                //             { name: '公司1', id: 1 },
+                //             { name: '公司2', id: 2 },
+                //             { name: '公司3', id: 3 },
+                //         ])
+                //     }, 4000)
+                // })
+                return [
+                    { name: '公司1', id: 1 },
+                    { name: '公司2', id: 2 },
+                    { name: '公司3', id: 3 },
+                ]
             },
             labelField: 'name',
             valueField: 'id'

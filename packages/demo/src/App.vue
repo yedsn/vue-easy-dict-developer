@@ -13,7 +13,7 @@ export default {
     HelloWorld
   },
   mounted() {
-    console.log(this.$dict.getDict('status'))
+    console.log("获取到字典", this.$dict.getDict('status'))
     // console.log(this.$dict.getDictLabel('status', 1))
     // console.log(this.$dict.getDictItem('status', 1))
     // console.log(this.$dict.getDict('company'))
