@@ -38,15 +38,15 @@ export default class Dict {
   }
 
   /**
-   * 重新加载字典
+   * 加载字典
    * @param {String} dictKey 字典键
    */
-  reloadDict(dictKey) {
+  loadDict(dictKey, force) {
     const dictMeta = this.dictMetas.find(e => e.dictKey === dictKey)
     if (dictMeta === undefined) {
       return Promise.reject(`the dict meta of ${dictKey} was not found`)
     }
-    return loadDict(this, dictMeta)
+    return loadDict(this, dictMeta, force)
   }
 
   /**
@@ -54,7 +54,22 @@ export default class Dict {
    * @param {String} dictKey 字典键
    */
   getDict(dictKey) {
+    if(!this.dictDataPool[dictKey]) {
+      console.warn(`you are loading an unloaded dict "${dictKey}", please do it after load`)
+    }
     return this.dictDataPool[dictKey] || []
+  }
+
+  /**
+   * 获取字典标签
+   * @param {String} dictKey
+   * @param {*} value
+   * @returns
+   */
+  getDictLabel(dictKey, value) {
+    const dict = this.getDict(dictKey)
+    const dictData = dict.find(e => e.value === value)
+    return dictData ? dictData.label : ''
   }
 }
 
@@ -64,9 +79,15 @@ export default class Dict {
  * @param {DictMeta} dictMeta 字典元数据
  * @returns {Promise}
  */
-function loadDict(dict, dictMeta) {
+function loadDict(dict, dictMeta, force = false) {
   return new Promise((resolve) => {
     let { dictKey, dictData, loadData, labelField, valueField} = dictMeta
+
+    // 不强制加载，且已经加载过，则直接返回
+    if(dict[dictKey] && !force) {
+      resolve(dict[dictKey])
+    }
+
     console.log(`start load dict: ${dictKey}`)
     // 加载数据方法
     if(loadData) {

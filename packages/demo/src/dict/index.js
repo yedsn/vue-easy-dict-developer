@@ -16,15 +16,15 @@ Vue.use(VueEasyDict, {
                 { label: '启用', value: 1, color: 'red' },
                 { label: '禁用', value: 0, color: 'green' }
             ],
-            loadData() {
-                return [
-                    { label: 'ok', value: 1 }
-                ]
-            }
+            // loadData() {
+            //     return [
+            //         { label: 'ok', value: 1 }
+            //     ]
+            // }
         },
         {
             dictKey: 'company',
-            immediateLoad: false,
+            // immediateLoad: false,
             loadData(dictMeta) {
                 console.log("开始加载", dictMeta)
                 // return new Promise((resolve) => {

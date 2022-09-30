@@ -12,8 +12,11 @@ export default {
   components: {
     HelloWorld
   },
-  mounted() {
+  async mounted() {
     console.log("获取到字典", this.$dict.getDict('status'))
+    console.log("获取到字典", this.$dict.getDictLabel('status', 1))
+    await this.$dict.loadDict('company')
+    console.log("获取到字典", this.$dict.getDict('company'))
     // console.log(this.$dict.getDictLabel('status', 1))
     // console.log(this.$dict.getDictItem('status', 1))
     // console.log(this.$dict.getDict('company'))
