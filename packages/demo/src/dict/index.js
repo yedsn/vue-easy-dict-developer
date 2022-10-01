@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import VueEasyDict from 'vue-easy-dict'
 Vue.use(VueEasyDict, {
-    showLog: false,
+    showLog: true,
     dicts: [
         {
             dictKey: 'status',

@@ -1,4 +1,4 @@
-# pnpm-monorepo-starter
+# VueEasyDict
 
 ## 启动开发项目
 
