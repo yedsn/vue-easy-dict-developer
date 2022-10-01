@@ -12,20 +12,23 @@ npm i vue-easy-dict -S
 
 ```vue
 
+
 import Vue from 'vue'
 import VueEasyDict from 'vue-easy-dict'
 Vue.use(VueEasyDict, {
+    showLog: false,
     dicts: [
         {
             dictKey: 'status',
-            dictData: [
+            data: [
                 { label: '启用', value: 1, color: 'red' },
                 { label: '禁用', value: 0, color: 'green' }
             ]
         },
         {
             dictKey: 'company',
-            loadData() {
+            immediateLoad: false,
+            data() {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve([
@@ -39,8 +42,12 @@ Vue.use(VueEasyDict, {
             labelField: 'name',
             valueField: 'id'
         }
-    ]
+    ],
+    defaultData() {
+        return []
+    },
 })
+
 
 ```
 

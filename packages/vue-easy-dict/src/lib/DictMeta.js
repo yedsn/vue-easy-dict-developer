@@ -7,6 +7,8 @@ import DictOptions from './DictOptions'
  * @property {Boolean} immediateLoad 是否立即加载
  * @property {String} labelField 标签字段
  * @property {String} valueField 值字段
+ * @property {Promise} loadPromise 加载字典的Promise
+ * @property {Boolean} showLog 是否打印日志
  */
 export default class DictMeta {
   constructor(options) {
@@ -16,6 +18,7 @@ export default class DictMeta {
     this.labelField = options.labelField
     this.valueField = options.valueField
     this.loadPromise = null
+    this.showLog = options.showLog
   }
 }
 

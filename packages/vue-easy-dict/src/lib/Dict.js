@@ -90,16 +90,18 @@ export default class Dict {
  * 加载字典
  * @param {Dict} dict 字典
  * @param {DictMeta} dictMeta 字典元数据
+ * @param {Boolean} force 是否强制刷新字典
  * @returns {Promise}
  */
 function loadDict(dict, dictMeta, force = false) {
-  if(dictMeta.loadPromise && !force) {
-    return dictMeta.loadPromise
-  }
-  let loadPromise = new Promise((resolve) => {
-    let { dictKey, data, labelField, valueField} = dictMeta
+  let { dictKey, data, labelField, valueField, loadPromise, showLog} = dictMeta
 
-    console.log(`start load dict: ${dictKey}`)
+  if(loadPromise && !force) {
+    return loadPromise
+  }
+
+  let _loadPromise = new Promise((resolve) => {
+    showLog && (console.log(`start load dict: ${dictKey}`))
     // 加载数据方法
     if(data instanceof Function) {
       let loadFun = data(dictMeta)
@@ -108,21 +110,23 @@ function loadDict(dict, dictMeta, force = false) {
       }
       loadFun.then(response => {
         if (!(response instanceof Array)) {
-          console.error('the data function return a Promise of Array.')
+          console.error(`the data function of "${dictKey}" must return a Promise of Array.`)
           response = []
         }
         dict.dictDataPool[dictKey] = response.map(x => new DictData(x[labelField], x[valueField], x))
         resolve(dict.dictDataPool[dictKey])
       })
     } else {
-      if (!(data instanceof Array)) {
-        console.error('the dictData must be Array.')
-        response = []
+      if (!(data && data instanceof Array)) {
+        console.error(`the data field of "${dictKey}" must be Array.`)
+        data = []
       }
       dict.dictDataPool[dictKey] = data.map(x => new DictData(x[labelField], x[valueField], x))
       resolve(dict.dictDataPool[dictKey])
     }
+  }).then(() => {
+    showLog && (console.log(`loaded dict: ${dictKey}`))
   })
-  dictMeta.loadPromise = loadPromise
-  return loadPromise
+  dictMeta.loadPromise = _loadPromise
+  return _loadPromise
 }

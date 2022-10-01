@@ -1,5 +1,9 @@
 export const options = {
   /**
+   * 是否打印日志
+   */
+  showLog: true,
+  /**
    * 是否初始化时立即加载
    */
   immediateLoad: true,
