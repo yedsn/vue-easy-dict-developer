@@ -15,7 +15,8 @@
     "build": "webpack --mode production",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "postinstall": "node ./postinstall"
+    "postinstall": "node ./postinstall",
+    "postgit": "npm version patch && npm publish && git push --all"
   },
   "repository": {
     "type": "git",
