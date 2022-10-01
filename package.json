@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/hongxiaojian/vue-easy-dict"
+    "url": "git+https://github.com/yedsn/vue-easy-dict"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitee.com/hongxiaojian/vue-easy-dict/issues"
+    "url": "https://github.com/yedsn/vue-easy-dict/issues"
   },
-  "homepage": "https://gitee.com/hongxiaojian/vue-easy-dict#readme",
+  "homepage": "https://github.com/yedsn/vue-easy-dict#readme",
   "dependencies": {
   }
 }
