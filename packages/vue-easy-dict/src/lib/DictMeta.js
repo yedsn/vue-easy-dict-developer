@@ -3,8 +3,7 @@ import DictOptions from './DictOptions'
 /**
  * @classdesc 字典元数据
  * @property {String} dictKey 字典键
- * @property {String} dictData 数据
- * @property {Function} loadData 数据加载方法
+ * @property {String} data 数据（可以是数组或者函数）
  * @property {Boolean} immediateLoad 是否立即加载
  * @property {String} labelField 标签字段
  * @property {String} valueField 值字段
@@ -12,8 +11,7 @@ import DictOptions from './DictOptions'
 export default class DictMeta {
   constructor(options) {
     this.dictKey = options.dictKey
-    this.dictData = options.dictData
-    this.loadData = options.loadData
+    this.data = options.data
     this.immediateLoad = options.immediateLoad
     this.labelField = options.labelField
     this.valueField = options.valueField
@@ -28,6 +26,6 @@ export default class DictMeta {
  * @returns {DictMeta}
  */
 DictMeta.parse = function(options) {
-  let opts = { ...DictOptions, ...options }
+  let opts = { ...DictOptions, data: DictOptions.defaultData, ...options }
   return new DictMeta(opts)
 }

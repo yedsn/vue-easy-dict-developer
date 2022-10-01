@@ -4,13 +4,9 @@ export const options = {
    */
   immediateLoad: true,
   /**
-   * 字典加载方法，方法签名为function(dictMeta: DictMeta): Promise | Array
-   */
-  loadData: null,
-  /**
    * 字典数据
    */
-  dictData: [],
+  data: [],
   /**
    * 默认标签字段
    */

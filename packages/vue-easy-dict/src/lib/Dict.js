@@ -22,7 +22,6 @@ export default class Dict {
     let dicts = options.dicts || []
     const loadDictTasks = []
     this.dictMetas = dicts.map(x => DictMeta.parse(x))
-    console.log('dictMetas', this.dictMetas)
     this.dictMetas.forEach(dictMeta => {
       if (!dictMeta.immediateLoad) {
         return
@@ -98,29 +97,29 @@ function loadDict(dict, dictMeta, force = false) {
     return dictMeta.loadPromise
   }
   let loadPromise = new Promise((resolve) => {
-    let { dictKey, dictData, loadData, labelField, valueField} = dictMeta
+    let { dictKey, data, labelField, valueField} = dictMeta
 
     console.log(`start load dict: ${dictKey}`)
     // 加载数据方法
-    if(loadData) {
-      let loadFun = loadData(dictMeta)
+    if(data instanceof Function) {
+      let loadFun = data(dictMeta)
       if (!(loadFun instanceof Promise)) {
         loadFun = Promise.resolve(loadFun)
       }
       loadFun.then(response => {
         if (!(response instanceof Array)) {
-          console.error('the request return must be Promise of Array.')
+          console.error('the data function return a Promise of Array.')
           response = []
         }
         dict.dictDataPool[dictKey] = response.map(x => new DictData(x[labelField], x[valueField], x))
         resolve(dict.dictDataPool[dictKey])
       })
     } else {
-      if (!(dictData instanceof Array)) {
+      if (!(data instanceof Array)) {
         console.error('the dictData must be Array.')
         response = []
       }
-      dict.dictDataPool[dictKey] = dictData.map(x => new DictData(x[labelField], x[valueField], x))
+      dict.dictDataPool[dictKey] = data.map(x => new DictData(x[labelField], x[valueField], x))
       resolve(dict.dictDataPool[dictKey])
     }
   })
