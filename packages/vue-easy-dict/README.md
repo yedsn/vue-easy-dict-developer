@@ -162,7 +162,7 @@ export default {
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
     this.dept = this.$dict.getDictData('dept')
-    await 
+    await this.$dict.loadDict('company') // 加载指定字典
     this.company = this.$dict.getDictData('company')
   }
 }
@@ -233,7 +233,7 @@ export default {
   async created() {
     await this.$dict.ready // 等待全部默认加载的字典加载完成
     this.dept = this.$dict.getDictData('dept')
-    await 
+    await this.$dict.loadDict('company') // 加载指定字典
     this.company = this.$dict.getDictData('company')
   }
 }
