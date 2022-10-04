@@ -8,7 +8,6 @@
   "sideEffects": false,
   "files": [
     "src",
-    "dist",
     "postinstall.js"
   ],
   "scripts": {
