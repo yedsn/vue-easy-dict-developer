@@ -27,6 +27,15 @@ Vue.use(VueEasyDict, {
             },
             labelField: 'name',
             valueField: 'id'
+        },
+        {
+            dictKey: 'dept',
+            data: [
+                { id: 1, name: "信息部" },
+                { id: 2, name: "人力资源部" }
+            ],
+            labelField: 'name',
+            valueField: 'id'
         }
     ],
     defaultData() {
