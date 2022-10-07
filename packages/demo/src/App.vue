@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <Demo1 />
-    <Demo2 /> -->
+    <Demo1 />
+    <Demo2 />
     <Demo3 />
   </div>
 </template>

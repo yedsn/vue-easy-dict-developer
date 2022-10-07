@@ -14,8 +14,8 @@ export default {
     }
   },
   async created() {
-    await this.$dict.loadDict('company')
-    this.company = this.$dict.getDictData('company')
+    await this.$dict.loadType('company')
+    this.company = this.$dict.getType('company')
   }
 }
 </script>

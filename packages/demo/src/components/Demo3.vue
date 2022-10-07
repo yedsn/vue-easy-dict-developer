@@ -32,7 +32,7 @@
           }
       },
       async mounted() {
-          await this.$dict.loadDict('dept') // 等待部门数据加载到字典
+          await this.$dict.loadType('dept') // 等待部门数据加载到字典
           this.getList()
       },
       methods: {
@@ -40,12 +40,12 @@
               let res = getUserList({})
               // 解析并转义字典数据赋值
               this.list = res.data.map(item => {
-                   let statusRaw = this.$dict.getDictRaw("status", item.status) // 获取状态对应字典原始对象
+                   let statusRaw = this.$dict.selectDictRaw("status", item.status) // 获取状态对应字典原始对象
                   return {
                       ...item,
                       statusStr: statusRaw.label,
                       statusColor: statusRaw.color,
-                      deptName: this.$dict.getDictLabel("dept", item.deptId) // 翻译字典值
+                      deptName: this.$dict.selectDictLabel("dept", item.deptId) // 翻译字典值
                   }
               })
               
